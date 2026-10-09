@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schoology</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* SLEEK & PURPLE GLOBAL STYLES */
+        :root {
+            --bg-gradient: linear-gradient(135deg, #0d0a1b 0%, #1e1338 50%, #2a164d 100%);
+            --primary: #9d4edd;
+            --primary-hover: #b975f0;
+            --primary-glow: rgba(157, 78, 221, 0.4);
+            --ghost-accent: #00f5d4;
+            --ghost-glow: rgba(0, 245, 212, 0.4);
+            --accent: #e0aaff;
+            --text-main: #f8f9fa;
+            --text-muted: #b0a8ba;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-main);
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        /* HOME PAGE STYLES */
+        #home-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: var(--bg-gradient);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .title-sleek {
+            font-size: 4rem;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+            text-align: center;
+            text-shadow: 0 0 30px var(--primary-glow);
+        }
+
+        .title-sleek span {
+            color: var(--accent);
+        }
+
+        .home-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .enter-btn {
+            background: rgba(157, 78, 221, 0.1);
+            color: var(--accent);
+            border: 1px solid var(--primary);
+            padding: 16px 40px;
+            font-size: 20px;
+            font-weight: 600;
+            font-family: 'Outfit', sans-serif;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .enter-btn:hover {
+            background: var(--primary);
+            color: #ffffff;
+            box-shadow: 0 0 25px var(--primary-glow);
+            transform: translateY(-2px);
+        }
+
+        /* Ghostlink specific button style */
+        .ghost-btn {
+            background: rgba(0, 245, 212, 0.05);
+            color: var(--ghost-accent);
+            border-color: var(--ghost-accent);
+        }
+
+        .ghost-btn:hover {
+            background: var(--ghost-accent);
+            color: #0d0a1b;
+            box-shadow: 0 0 25px var(--ghost-glow);
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            font-size: 14px;
+            z-index: 2000;
+        }
+
+        /* SUB-PAGES */
+        .sub-page {
+            display: none;
+            width: 100%;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* HIDE SIDEBAR TO CREATE A FLAT LIST */
+        .sidebar {
+            display: none !important;
+        }
+
+        /* CENTERED MAIN CONTENT */
+        .main-content {
+            margin: 0 auto;
+            flex: 1;
+            padding: 40px;
+            max-width: 800px;
+            position: relative;
+        }
+
+        h1 {
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 3rem;
+            font-weight: 800;
+            text-shadow: 0 0 20px rgba(157, 78, 221, 0.3);
+        }
+
+        .header-links { text-align: center; margin-bottom: 30px; font-weight: 300; font-size: 16px; color: var(--text-muted); }
+        .link-text { color: var(--accent); text-decoration: none; font-weight: 500; transition: color 0.2s ease, text-shadow 0.2s ease; }
+        .link-text:hover { color: #ffffff; text-shadow: 0 0 10px var(--primary-glow); }
+
+        /* SEARCH & BUTTONS */
+        .controls-container { display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 50px; flex-wrap: wrap; }
+        
+        #searchInput {
+            padding: 14px 24px;
+            width: 100%;
+            max-width: 450px;
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            outline: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        #searchInput::placeholder { color: rgba(255, 255, 255, 0.4); }
+        #searchInput:focus { border-color: var(--primary); box-shadow: 0 0 15px var(--primary-glow); background: rgba(255, 255, 255, 0.08); }
+
+        #lolbutton {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--accent);
+            padding: 14px 24px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #lolbutton:hover { background: var(--primary); color: white; box-shadow: 0 0 15px var(--primary-glow); }
+
+        /* DYNAMIC GAME BUTTONS - FLAT LIST OVERRIDES */
+        .letter-section {
+            background: transparent !important;
+            border: none !important;
+            border-radius: 0 !important;
+            padding: 0 !important;
+            margin-bottom: 0 !important;
+            backdrop-filter: none !important;
+        }
+
+        /* Hide the alphabet headers entirely */
+        .letter-header { 
+            display: none !important; 
+        }
+
+        input[type="button"] {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            padding: 16px 25px;
+            font-size: 16px;
+            font-weight: 400;
+            font-family: 'Outfit', sans-serif;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+            max-width: 600px;
+            text-align: left;
+            margin-bottom: 12px;
+        }
+
+        input[type="button"]:hover {
+            background: rgba(157, 78, 221, 0.2);
+            border-color: var(--primary-hover);
+            transform: translateX(5px);
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .buttons-container { display: flex; flex-direction: column; align-items: center; }
+
+        @media (max-width: 768px) {
+            .main-content { padding: 20px; }
+            .title-sleek { font-size: 2.5rem; }
+            .controls-container { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HOME PAGE -->
+    <div id="home-page">
+        <div class="title-sleek">NEO NEXUS<span></span></div>
+        <div class="home-buttons">
+            <button class="enter-btn" onclick="openPage('ugs-page')">Enter UGS</button>
+            <button class="enter-btn ghost-btn" onclick="openPage('ghostlink-page')">Enter Ghostlink</button>
+        </div>
+    </div>
+
+    <!-- UGS MAIN PAGE -->
+    <div id="ugs-page" class="sub-page">
+        <button class="enter-btn back-btn" onclick="goHome()">Return Home</button>
+
+        <div class="main-content">
+            <h1>UGS Files</h1>
+            
+            <div class="header-links">
+                Files from <a href="https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/" target="_blank" class="link-text">Ultimate Game Stash Google Doc</a><br><br>
+                Discord Server: <a href="https://discord.gg/rmVsAqkpkA" target="_blank" class="link-text">https://discord.gg/rmVsAqkpkA</a>
+            </div>
+
+            <div class="controls-container">
+                <input type="text" placeholder="Search files..." id="searchInput">
+                <button id="lolbutton" onclick="const script = document.createElement('script');script.src = 'https://cdn.jsdelivr.net/gh/bubbls/ugs-singlefile@latest/game.js';document.body.appendChild(script);">Force Load Script</button>
+            </div> 
+            
+            <div id="sections-container">  
+                <!-- Games populated here by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- GHOSTLINK PAGE -->
+    <div id="ghostlink-page" class="sub-page" style="height: 100vh;">
+        <!-- Clean header for Ghostlink -->
+        <div style="padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.3); border-bottom: 1px solid var(--glass-border);">
+            <h2 style="color: var(--ghost-accent); margin: 0; font-size: 28px; text-shadow: 0 0 15px var(--ghost-glow);">Ghostlink Archive</h2>
+            <button class="enter-btn ghost-btn" style="position: static; padding: 10px 24px; font-size: 16px;" onclick="goHome()">Return Home</button>
+        </div>
+        
+        <!-- THIS IFRAME LOADS YOUR 8000 LINES SAFELY -->
+        <iframe src="ghostlink.html" style="width: 100%; height: calc(100vh - 85px); border: none; background: transparent;"></iframe>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/gh/bubbls/ugs-singlefile@main/searchbut.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/bubbls/ugs-singlefile@main/games.js"></script>
+    
+    <script>
+        // Smooth transition functions
+        function openPage(pageId) {
+            const home = document.getElementById('home-page');
+            home.style.opacity = '0';
+            setTimeout(() => {
+                home.style.display = 'none';
+                document.getElementById(pageId).style.display = 'block';
+            }, 500);
+        }
+
+        function goHome() {
+            document.getElementById('ugs-page').style.display = 'none';
+            document.getElementById('ghostlink-page').style.display = 'none';
+            const home = document.getElementById('home-page');
+            home.style.display = 'flex';
+            setTimeout(() => {
+                home.style.opacity = '1';
+            }, 50);
+        }
+    </script>
+</body> 
+</html>
