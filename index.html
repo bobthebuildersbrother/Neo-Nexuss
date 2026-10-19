@@ -263,10 +263,10 @@
         <div class="more-sites-title">MORE GAME SITES</div>
         <div class="home-buttons">
             <button class="enter-btn site-btn" onclick="window.open('http://fpsplay.online','_blank')">FPS Play</button>
-            <button class="enter-btn site-btn" onclick="window.open('https://seraph-games-4xl6wj2o1j60.edgeone.cool','_blank')">Seraph</button>
-            <button class="enter-btn site-btn" onclick="window.open('https://kh0lite-games-p21ox6dp3ev3.edgeone.cool','_blank')">3kh0 Lite</button>
-            <button class="enter-btn site-btn" onclick="window.open('https://monkeygg2-games-lo6lv4rujv7p.edgeone.cool','_blank')">MonkeyGG2</button>
-            <button class="enter-btn site-btn" onclick="window.open('https://macvg-games-wqn46zk8p91f.edgeone.cool','_blank')">MacVG</button>
+            <button class="enter-btn site-btn" onclick="openPage('seraph-page')">Seraph</button>
+            <button class="enter-btn site-btn" onclick="openPage('lite3kh0-page')">3kh0 Lite</button>
+            <button class="enter-btn site-btn" onclick="openPage('monkeygg2-page')">MonkeyGG2</button>
+            <button class="enter-btn site-btn" onclick="openPage('macvg-page')">MacVG</button>
         </div>
     </div>
 
@@ -305,6 +305,42 @@
         <iframe src="ghostlink.html" style="width: 100%; height: calc(100vh - 85px); border: none; background: transparent;"></iframe>
     </div>
 
+    <!-- SERAPH PAGE -->
+    <div id="seraph-page" class="sub-page" style="height: 100vh;">
+        <div style="padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.3); border-bottom: 1px solid var(--glass-border);">
+            <h2 style="color: var(--accent); margin: 0; font-size: 28px; text-shadow: 0 0 15px var(--primary-glow);">Seraph</h2>
+            <button class="enter-btn" style="position: static; padding: 10px 24px; font-size: 16px;" onclick="goHome()">Return Home</button>
+        </div>
+        <iframe src="https://seraph-games-4xl6wj2o1j60.edgeone.cool" style="width: 100%; height: calc(100vh - 85px); border: none; background: transparent;"></iframe>
+    </div>
+
+    <!-- 3KH0 LITE PAGE -->
+    <div id="lite3kh0-page" class="sub-page" style="height: 100vh;">
+        <div style="padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.3); border-bottom: 1px solid var(--glass-border);">
+            <h2 style="color: var(--accent); margin: 0; font-size: 28px; text-shadow: 0 0 15px var(--primary-glow);">3kh0 Lite</h2>
+            <button class="enter-btn" style="position: static; padding: 10px 24px; font-size: 16px;" onclick="goHome()">Return Home</button>
+        </div>
+        <iframe src="https://kh0lite-games-p21ox6dp3ev3.edgeone.cool" style="width: 100%; height: calc(100vh - 85px); border: none; background: transparent;"></iframe>
+    </div>
+
+    <!-- MONKEYGG2 PAGE -->
+    <div id="monkeygg2-page" class="sub-page" style="height: 100vh;">
+        <div style="padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.3); border-bottom: 1px solid var(--glass-border);">
+            <h2 style="color: var(--accent); margin: 0; font-size: 28px; text-shadow: 0 0 15px var(--primary-glow);">MonkeyGG2</h2>
+            <button class="enter-btn" style="position: static; padding: 10px 24px; font-size: 16px;" onclick="goHome()">Return Home</button>
+        </div>
+        <iframe src="https://monkeygg2-games-lo6lv4rujv7p.edgeone.cool" style="width: 100%; height: calc(100vh - 85px); border: none; background: transparent;"></iframe>
+    </div>
+
+    <!-- MACVG PAGE -->
+    <div id="macvg-page" class="sub-page" style="height: 100vh;">
+        <div style="padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.3); border-bottom: 1px solid var(--glass-border);">
+            <h2 style="color: var(--accent); margin: 0; font-size: 28px; text-shadow: 0 0 15px var(--primary-glow);">MacVG</h2>
+            <button class="enter-btn" style="position: static; padding: 10px 24px; font-size: 16px;" onclick="goHome()">Return Home</button>
+        </div>
+        <iframe src="https://macvg-games-wqn46zk8p91f.edgeone.cool" style="width: 100%; height: calc(100vh - 85px); border: none; background: transparent;"></iframe>
+    </div>
+
     <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/gh/bubbls/ugs-singlefile@main/searchbut.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/bubbls/ugs-singlefile@main/games.js"></script>
@@ -321,8 +357,7 @@
         }
 
         function goHome() {
-            document.getElementById('ugs-page').style.display = 'none';
-            document.getElementById('ghostlink-page').style.display = 'none';
+            document.querySelectorAll('.sub-page').forEach(p => p.style.display = 'none');
             const home = document.getElementById('home-page');
             home.style.display = 'flex';
             setTimeout(() => {
